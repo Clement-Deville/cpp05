@@ -12,17 +12,35 @@
 
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat()
-{
-	std::cout << "\e[0;32mBureaucrat Default constructor called\e[0m" << std::endl;
-	this->_type = "Bureaucrat";
+const char *TooLowException::what () const throw(){
+	return ("Too Low Exception");
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &Cpy)
+const char *TooHighException::what () const throw(){
+	return ("Too high Exception");
+}
+
+TooHighException	Bureaucrat::GradeTooHighException;
+TooLowException		Bureaucrat::GradeTooLowException;
+
+Bureaucrat::Bureaucrat() : _name(""), _grade(0)
+{
+	std::cout << "\e[0;32mBureaucrat Default constructor called\e[0m" << std::endl;
+}
+
+Bureaucrat::Bureaucrat(const Bureaucrat &Cpy) : _name(Cpy._name)
 {
 	std::cout << "\e[0;32mBureaucrat Copy constructor called\e[0m" << std::endl;
-	this->_type = "Bureaucrat";
-	*this = Cpy;
+	this->_grade = Cpy._grade;
+}
+
+Bureaucrat::Bureaucrat(const std::string name, unsigned short newGrade): _name(name)
+{
+	std::cout << "\e[0;32mBureaucrat NewGrade constructor called\e[0m" << std::endl;
+	if (newGrade == 0)
+		throw GradeTooHighException;
+	if (newGrade >= 150)
+		throw GradeTooLowException;
 }
 
 Bureaucrat::~Bureaucrat()
@@ -30,10 +48,20 @@ Bureaucrat::~Bureaucrat()
 	std::cout << "\e[0;31mBureaucrat Destructor called\e[0m" << std::endl;
 }
 
-Bureaucrat & Bureaucrat::operator=(const Bureaucrat &Cpy)
+unsigned short	Bureaucrat::getGrade(void) const
 {
-	std::cout << "\e[0;32mBureaucrat Copy assignement operator called\e[0m" << std::endl;
-	if (this == &Cpy)
-		return (*this);
-	return (*this);
+	return (this->_grade);
 }
+
+std::string	Bureaucrat::getName(void) const
+{
+	return (this->_name);
+}
+
+
+std::ostream & operator<<(std::ostream &out, const Bureaucrat B)
+{
+	out << "My name is: " << B.getName() << " and my grade is: " << B.getGrade() << std::endl;
+	return (out);
+}
+
