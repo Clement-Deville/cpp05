@@ -12,6 +12,10 @@
 
 #include "Bureaucrat.hpp"
 
+TooHighException	Bureaucrat::GradeTooHighException;
+TooLowException		Bureaucrat::GradeTooLowException;
+EmptyNameException	Bureaucrat::NameEmptyException;
+
 const char *TooLowException::what () const throw(){
 	return ("Too Low Exception");
 }
@@ -20,8 +24,9 @@ const char *TooHighException::what () const throw(){
 	return ("Too high Exception");
 }
 
-TooHighException	Bureaucrat::GradeTooHighException;
-TooLowException		Bureaucrat::GradeTooLowException;
+const char *EmptyNameException::what () const throw(){
+	return ("Empty Name Exception");
+}
 
 Bureaucrat::Bureaucrat() : _name(""), _grade(0)
 {
@@ -34,13 +39,16 @@ Bureaucrat::Bureaucrat(const Bureaucrat &Cpy) : _name(Cpy._name)
 	this->_grade = Cpy._grade;
 }
 
-Bureaucrat::Bureaucrat(const std::string name, unsigned short newGrade): _name(name)
+Bureaucrat::Bureaucrat(const std::string name, int newGrade): _name(name)
 {
 	std::cout << "\e[0;32mBureaucrat NewGrade constructor called\e[0m" << std::endl;
-	if (newGrade == 0)
+	if (newGrade <= 0)
 		throw GradeTooHighException;
-	if (newGrade >= 150)
+	if (newGrade > 150)
 		throw GradeTooLowException;
+	if (name.empty())
+		throw NameEmptyException;
+	this->_grade = newGrade;
 }
 
 Bureaucrat::~Bureaucrat()
@@ -59,9 +67,49 @@ std::string	Bureaucrat::getName(void) const
 }
 
 
-std::ostream & operator<<(std::ostream &out, const Bureaucrat B)
+std::ostream & operator<<(std::ostream &out, const Bureaucrat &B)
 {
-	out << "My name is: " << B.getName() << " and my grade is: " << B.getGrade() << std::endl;
+	out << B.getName() << ", bureaucrat grade " << B.getGrade() << std::endl;
 	return (out);
 }
 
+Bureaucrat & Bureaucrat::operator=(const Bureaucrat &Cpy)
+{
+	std::cout << "\e[0;32mBureaucrat assignement operator called\e[0m" << std::endl;
+	this->_grade = Cpy._grade;
+	return (*this);
+}
+
+Bureaucrat Bureaucrat::operator++(void)
+{
+	if (this->_grade == 1)
+		throw GradeTooHighException;
+	this->_grade++;
+	return (*this);
+}
+
+Bureaucrat &Bureaucrat::operator+=(int &value)
+{
+	if (this->_grade - value < 1)
+		throw GradeTooHighException;
+	this->_grade += value;
+	return (*this);
+}
+
+Bureaucrat Bureaucrat::operator--(void)
+{
+	if (this->_grade == 150)
+		throw GradeTooLowException;
+	this->_grade--;
+	return (*this);
+}
+
+Bureaucrat &Bureaucrat::operator-=(int &value)
+{
+	if (this->_grade + value < 0)
+		throw std::out_of_range("out of range");
+	if (this->_grade + value > 150)
+		throw Bureaucrat::GradeTooLowException;
+	this->_grade -= value;
+	return (*this);
+}
