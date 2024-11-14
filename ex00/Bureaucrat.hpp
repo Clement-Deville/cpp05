@@ -48,9 +48,9 @@ public:
 
 	Bureaucrat & operator=(const Bureaucrat &Cpy);
 	Bureaucrat operator++(void);
-	Bureaucrat &operator+=(int &value);
+	Bureaucrat &operator+=(int value);
 	Bureaucrat operator--(void);
-	Bureaucrat &operator-=(int &value);
+	Bureaucrat &operator-=(int value);
 
 	unsigned short getGrade(void) const;
 	std::string getName(void) const;
