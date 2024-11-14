@@ -12,39 +12,9 @@
 
 #include "Bureaucrat.hpp"
 
-TooHighException	Bureaucrat::GradeTooHighException;
-TooLowException		Bureaucrat::GradeTooLowException;
+std::out_of_range	Bureaucrat::GradeTooHighException("Grade Too High");
+std::out_of_range	Bureaucrat::GradeTooLowException("Grade Too Low");
 EmptyNameException	Bureaucrat::NameEmptyException;
-
-/**--------------------------------------------
- *               Utils
- *---------------------------------------------**/
-
-bool onlyWhiteSpace(const std::string name)
-{
-	for (int i = 0; name[i]; i++)
-	{
-		if (std::isspace(name[i]) == false)
-			return (false);
-	}
-	return (true);
-}
-
-/**------------------------------------------------------------------------
- *                           Custom exception functions
- *------------------------------------------------------------------------**/
-
-const char *TooLowException::what () const throw(){
-	return ("Too Low Exception");
-}
-
-const char *TooHighException::what () const throw(){
-	return ("Too high Exception");
-}
-
-const char *EmptyNameException::what () const throw(){
-	return ("Empty Name Exception");
-}
 
 /**------------------------------------------------------------------------
  *                           Constructors/Destructors
@@ -155,4 +125,35 @@ Bureaucrat &Bureaucrat::operator-=(int value)
 		throw Bureaucrat::GradeTooLowException;
 	this->_grade += value;
 	return (*this);
+}
+
+/**--------------------------------------------
+ *               Utils
+ *---------------------------------------------**/
+
+bool onlyWhiteSpace(const std::string name)
+{
+	for (int i = 0; name[i]; i++)
+	{
+		if (std::isspace(name[i]) == false)
+			return (false);
+	}
+	return (true);
+}
+
+const char *EmptyNameException::what () const throw(){
+	return ("Empty Name Exception");
+}
+
+void	Bureaucrat::signForm(Form &F)
+{
+	try
+	{
+		F.beSigned(*this);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
 }

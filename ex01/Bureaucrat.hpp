@@ -17,23 +17,14 @@
 # include <iostream>
 # include <exception>
 
-class TooHighException: public std::exception
-{
-	public:
-	virtual const char *what(void) const throw();
-};
-
-class TooLowException: public std::exception
-{
-	public:
-	virtual const char *what(void) const throw();
-};
-
 class EmptyNameException: public std::exception
 {
 	public:
 	virtual const char *what(void) const throw();
 };
+
+class Form;
+void	Form::beSigned(const Bureaucrat &B);
 
 class Bureaucrat
 {
@@ -56,11 +47,15 @@ public:
 
 	int getGrade(void) const;
 	std::string getName(void) const;
-	static TooHighException		GradeTooHighException;
-	static TooLowException		GradeTooLowException;
-	static EmptyNameException	NameEmptyException;
+
+	void	signForm(Form &F);
+
+	static	EmptyNameException	NameEmptyException;
+	static	std::out_of_range GradeTooHighException;
+	static	std::out_of_range GradeTooLowException;
 };
 
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &B);
+bool onlyWhiteSpace(const std::string name);
 
 #endif
