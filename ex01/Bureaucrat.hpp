@@ -16,6 +16,7 @@
 # include <string>
 # include <iostream>
 # include <exception>
+# include "Form.hpp"
 
 class EmptyNameException: public std::exception
 {
@@ -24,7 +25,6 @@ class EmptyNameException: public std::exception
 };
 
 class Form;
-void	Form::beSigned(const Bureaucrat &B);
 
 class Bureaucrat
 {

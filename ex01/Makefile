@@ -6,7 +6,7 @@
 #    By: cdeville <cdeville@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/12 16:23:30 by peanut            #+#    #+#              #
-#    Updated: 2024/10/29 17:41:26 by cdeville         ###   ########.fr        #
+#    Updated: 2024/11/18 12:08:48 by cdeville         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRC_DIR = ./
 
 SRC =	main.cpp \
 		Bureaucrat.cpp \
-
+		Form.cpp \
+		
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 
 INCLUDES_DIR= ./
