@@ -24,21 +24,21 @@ EmptyNameException	AForm::NameEmptyException;
  *                           Constructors/Destructors
  *------------------------------------------------------------------------**/
 
-AForm::AForm() : _name(""), _GradeToSign(1), _GradeToExec(1), _is_signed(false)
+AForm::AForm() : _name(""), _target(""), _GradeToSign(1), _GradeToExec(1), _is_signed(false)
 {
 	std::cout << "\e[0;32mAForm Default constructor called\e[0m" << std::endl;
 }
 
 AForm::AForm(const AForm &Cpy) :
-	_name(Cpy._name), _GradeToSign(Cpy._GradeToSign),
+	_name(Cpy._name), _target(Cpy._target), _GradeToSign(Cpy._GradeToSign),
 	_GradeToExec(Cpy._GradeToExec)
 {
 	std::cout << "\e[0;32mAForm Copy constructor called\e[0m" << std::endl;
 	*this = Cpy;
 }
 
-AForm::AForm(const std::string name, int newGradeToExec, int newGradeToSign, bool issigned):
-	_name(name), _GradeToSign(newGradeToSign), _GradeToExec(newGradeToExec), _is_signed(issigned)
+AForm::AForm(const std::string name, const std::string target, int newGradeToExec, int newGradeToSign, bool issigned):
+	_name(name), _target(target), _GradeToSign(newGradeToSign), _GradeToExec(newGradeToExec), _is_signed(issigned)
 {
 	std::cout << "\e[0;32mAForm NewGrade constructor called\e[0m" << std::endl;
 	if (newGradeToExec == 0 || newGradeToSign == 0)
@@ -47,7 +47,7 @@ AForm::AForm(const std::string name, int newGradeToExec, int newGradeToSign, boo
 		throw std::out_of_range("out of range");
 	if (newGradeToExec > 150 || newGradeToSign > 150)
 		throw GradeTooLowException;
-	if (name.empty() || onlyWhiteSpace(name))
+	if (name.empty() || onlyWhiteSpace(name) || target.empty() || onlyWhiteSpace(target))
 		throw NameEmptyException;
 }
 
@@ -55,6 +55,10 @@ AForm::~AForm()
 {
 	std::cout << "\e[0;31mAForm Destructor called\e[0m" << std::endl;
 }
+
+/**========================================================================
+ *                           GETTERS
+ *========================================================================**/
 
 int	AForm::getGradeToExec(void) const
 {
@@ -71,7 +75,12 @@ std::string	AForm::getName(void) const
 	return (this->_name);
 }
 
-bool		AForm::getSigned(void) const
+std::string	AForm::getTarget(void) const
+{
+	return (this->_target);
+}
+
+bool	AForm::getSigned(void) const
 {
 	return (this->_is_signed);
 }

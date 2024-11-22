@@ -6,12 +6,13 @@
 /*   By: cdeville <cdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:06:34 by cdeville          #+#    #+#             */
-/*   Updated: 2024/11/18 16:57:42 by cdeville         ###   ########.fr       */
+/*   Updated: 2024/11/22 16:54:00 by cdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 #include <sstream>
 
 int	main(void)
@@ -21,30 +22,31 @@ int	main(void)
 	Bureaucrat	sophie = Bureaucrat("Sophie", 150);
 	Bureaucrat	lou = Bureaucrat("Lou", 20);
 
-	AForm		f1 = AForm("f1", 1, 75, false);
-	AForm		f2 = AForm("f2", 1, 2, false);
-	AForm		f3 = AForm("f3", 1, 20, false);
+	ShrubberyCreationForm		f1 = ShrubberyCreationForm("f1", "ADA");
+	ShrubberyCreationForm		f2 = ShrubberyCreationForm("f2", "Ferrari");
+	ShrubberyCreationForm		f3 = ShrubberyCreationForm("f3", "Leclerc");
 
 
-	std::cout << "--> Create a AForm with grade too high: \n";
+	std::cout << "--> Create a ShrubberyCreationForm with no target: \n";
 	try
 	{
-		AForm	f4 = AForm("f4", 1, 184, false);
+		ShrubberyCreationForm	f4 = ShrubberyCreationForm("f4","");
 	}
 	catch (std::exception &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
 
-	std::cout << "--> Create a AForm with grade too high: \n";
+	std::cout << "--> Create a ShrubberyCreationForm with no name: \n";
 	try
 	{
-		AForm	f4 = AForm("f4", 1, 0, false);
+		ShrubberyCreationForm	f4 = ShrubberyCreationForm("","ADA");
 	}
 	catch (std::exception &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
+
 
 	std::cout << "--> SignAForm: Sophie sign F1: \n";
 	try
@@ -100,7 +102,7 @@ int	main(void)
 	std::cout << "--> Duplicate SignAForm: Thierry sign F3: \n";
 	try
 	{
-		AForm f4("f4", 1, 150, 0);
+		ShrubberyCreationForm f4("f4", "EDF");
 		Bureaucrat("Low bureaucrat", 150).signAForm(f4);
 	}
 	catch (std::exception &e)

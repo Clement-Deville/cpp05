@@ -6,7 +6,7 @@
 #    By: cdeville <cdeville@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/12 16:23:30 by peanut            #+#    #+#              #
-#    Updated: 2024/11/18 16:57:42 by cdeville         ###   ########.fr        #
+#    Updated: 2024/11/22 16:56:39 by cdeville         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ SRC_DIR = ./
 SRC =	main.cpp \
 		Bureaucrat.cpp \
 		AForm.cpp \
+		ShrubberyCreationForm.cpp \
+		printASCIITree.cpp \
 
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 

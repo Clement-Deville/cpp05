@@ -18,8 +18,10 @@
 # include <exception>
 # include "AForm.hpp"
 
+
 class EmptyNameException: public std::exception
 {
+	//! DEFINIR LES EXCEPTIONS A L'INTERIEUR DE LA CLASSE  
 	public:
 	virtual const char *what(void) const throw();
 };

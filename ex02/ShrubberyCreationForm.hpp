@@ -6,7 +6,7 @@
 /*   By: cdeville <cdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:03:31 by cdeville          #+#    #+#             */
-/*   Updated: 2024/11/18 18:54:26 by cdeville         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:05:14 by cdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,23 @@
 # define SHRUBBERYCREATIONFORM_HPP
 
 # include "AForm.hpp"
+# include <fstream>
+# include <cstdlib>
 
 class ShrubberyCreationForm: public AForm
 {
 public:
 	ShrubberyCreationForm();
 	ShrubberyCreationForm(const ShrubberyCreationForm &Cpy);
-	ShrubberyCreationForm(const std::string name);
+	ShrubberyCreationForm(const std::string name, const std::string target);
 	virtual ~ShrubberyCreationForm();
 
 	ShrubberyCreationForm & operator=(const ShrubberyCreationForm &Cpy);
 
 	virtual	void	execute(Bureaucrat const & executor) const;
 };
+
+void	printASCITree(std::ostream &out);
 
 #endif
 

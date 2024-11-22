@@ -24,13 +24,14 @@ class AForm
 {
 protected:
 	const std::string	_name;
+	const std::string	_target;
 	const int			_GradeToSign;
 	const int			_GradeToExec;
 	bool				_is_signed;
 public:
 	AForm();
 	AForm(const AForm &Cpy);
-	AForm(const std::string name,
+	AForm(const std::string name,  const std::string target,
 		int newGradeToExec, int newGradeToSign, bool issigned);
 	virtual ~AForm();
 
@@ -39,6 +40,7 @@ public:
 	int			getGradeToExec(void) const;
 	int			getGradeToSign(void) const;
 	std::string	getName(void) const;
+	std::string	getTarget(void) const;
 	bool		getSigned(void) const;
 
 	void			beSigned(const Bureaucrat &B);
