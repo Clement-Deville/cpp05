@@ -6,7 +6,7 @@
 /*   By: cdeville <cdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:06:34 by cdeville          #+#    #+#             */
-/*   Updated: 2024/11/18 15:22:06 by cdeville         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:50:31 by cdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(void)
 	Form		f3 = Form("f3", 1, 20, false);
 
 
-	std::cout << "--> Create a form with grade too high: \n";
+	std::cout << "--> Create a form with grade too low: \n";
 	try
 	{
 		Form	f4 = Form("f4", 1, 184, false);

@@ -1,41 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
+/*   RobotomyRequestForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdeville <cdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:05:21 by cdeville          #+#    #+#             */
-/*   Updated: 2024/11/25 18:56:34 by cdeville         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:59:12 by cdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 /**------------------------------------------------------------------------
  *                           Constructors/Destructors
  *------------------------------------------------------------------------**/
 
-ShrubberyCreationForm::ShrubberyCreationForm(): AForm("ShrubberyCreationForm", "", 137, 145, false)
+RobotomyRequestForm::RobotomyRequestForm(): AForm("RobotomyRequestForm", "", 45, 72, false)
 {
-	std::cout << "\e[0;32mShrubberyCreationForm Default constructor called\e[0m" << std::endl;
+	std::cout << "\e[0;32mRobotomyRequestForm Default constructor called\e[0m" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &Cpy): AForm(Cpy)
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &Cpy): AForm(Cpy)
 {
-	std::cout << "\e[0;32mShrubberyCreationForm Copy constructor called\e[0m" << std::endl;
+	std::cout << "\e[0;32mRobotomyRequestForm Copy constructor called\e[0m" << std::endl;
 	*this = Cpy;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string target):
-	AForm("ShrubberyCreationForm" ,target, 137, 145, false)
+RobotomyRequestForm::RobotomyRequestForm(const std::string target):
+	AForm("RobotomyRequestForm", target, 45, 72, false)
 {
-	std::cout << "\e[0;32mShrubberyCreationForm NewGrade constructor called\e[0m" << std::endl;
+	std::cout << "\e[0;32mRobotomyRequestForm NewGrade constructor called\e[0m" << std::endl;
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm()
+RobotomyRequestForm::~RobotomyRequestForm()
 {
-	std::cout << "\e[0;31mShrubberyCreationForm Destructor called\e[0m" << std::endl;
+	std::cout << "\e[0;31mRobotomyRequestForm Destructor called\e[0m" << std::endl;
 }
 
 /**------------------------------------------------------------------------
@@ -45,7 +45,23 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 /*	Executes the form with a Bureaucrat executor, if it is not signed or if
 	the grade is not high enought, throws a corresponding exception */
 
-void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
+void robotomize(RobotomyRequestForm const & form)
+{
+	std::cout << "Makes some drilling noises... \n";
+	std::srand(std::time(0));
+	if (std::rand() % 2)
+	{
+		std::cout << "SUCESS, " << form.getTarget()
+			<< " has been successfully robotomised!" << std::endl;
+	}
+	else
+	{
+		std::cout << "FAILURE, " << form.getTarget()
+			<< " has not been robotomised!" << std::endl;
+	}
+}
+
+void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
 	if (this->_target.empty())
 		throw AForm::NameEmptyException();
@@ -53,18 +69,14 @@ void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 		throw AForm::GradeTooLowException();
 	if (this->_is_signed == false)
 		throw AForm::NotSignedException();
-	std::ofstream file;
-	file.exceptions(std::ofstream::failbit | std::ofstream::badbit);
-	file.open((this->_target + "_shruberry").c_str());
-	printASCITree(file);
-	file.close();
+	robotomize(*this);
 }
 
 /**------------------------------------------------------------------------
  *                           OPERATORS
  *------------------------------------------------------------------------**/
 
-ShrubberyCreationForm & ShrubberyCreationForm::operator=(const ShrubberyCreationForm &Cpy)
+RobotomyRequestForm & RobotomyRequestForm::operator=(const RobotomyRequestForm &Cpy)
 {
 	// a verifier
 	std::cout << "\e[0;32mAForm assignement operator called\e[0m" << std::endl;

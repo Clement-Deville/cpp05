@@ -6,12 +6,11 @@
 /*   By: cdeville <cdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:06:34 by cdeville          #+#    #+#             */
-/*   Updated: 2024/11/18 12:04:42 by cdeville         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:25:06 by cdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
 #include <sstream>
 
 #define YES	1
@@ -91,7 +90,7 @@ int	main(void)
 				test -= -tmp;
 			std::cout << test;
 		}
-		catch (const EmptyNameException& e)
+		catch (const Bureaucrat::NameEmptyException& e)
 		{
 			std::cerr << e.what() << '\n';
 			continue;

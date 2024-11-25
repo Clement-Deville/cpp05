@@ -6,7 +6,7 @@
 /*   By: cdeville <cdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:01:21 by cdeville          #+#    #+#             */
-/*   Updated: 2024/11/22 16:50:24 by cdeville         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:02:45 by cdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <dirent.h>
 #include <unistd.h>
 #include <ctime>
+#include <cstdlib>
+
 
 void	printASCITree(std::ostream &out)
 {

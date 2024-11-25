@@ -49,10 +49,24 @@ public:
 	std::string getName(void) const;
 
 	void	signForm(Form &F);
+	
+	class GradeTooHighException: public std::exception
+	{
+		public:
+		virtual const char *what(void) const throw();
+	};
 
-	static	EmptyNameException	NameEmptyException;
-	static	std::out_of_range GradeTooHighException;
-	static	std::out_of_range GradeTooLowException;
+	class GradeTooLowException: public std::exception
+	{
+		public:
+		virtual const char *what(void) const throw();
+	};
+
+	class NameEmptyException: public std::exception
+	{
+		public:
+		virtual const char *what(void) const throw();
+	};
 };
 
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &B);

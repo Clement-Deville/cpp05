@@ -6,7 +6,7 @@
 /*   By: cdeville <cdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 12:59:45 by cdeville          #+#    #+#             */
-/*   Updated: 2024/11/18 15:00:38 by cdeville         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:43:45 by cdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,23 @@ public:
 
 	void		beSigned(const Bureaucrat &B);
 
-	static std::out_of_range	GradeTooHighException;
-	static std::out_of_range	GradeTooLowException;
-	static EmptyNameException	NameEmptyException;
+	class GradeTooHighException: public std::exception
+	{
+		public:
+		virtual const char *what(void) const throw();
+	};
+
+	class GradeTooLowException: public std::exception
+	{
+		public:
+		virtual const char *what(void) const throw();
+	};
+
+	class NameEmptyException: public std::exception
+	{
+		public:
+		virtual const char *what(void) const throw();
+	};
 };
 
 std::ostream & operator<<(std::ostream &out, const Form &B);

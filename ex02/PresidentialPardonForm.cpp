@@ -1,41 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
+/*   PresidentialPardonForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdeville <cdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:05:21 by cdeville          #+#    #+#             */
-/*   Updated: 2024/11/25 18:56:34 by cdeville         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:59:12 by cdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 /**------------------------------------------------------------------------
  *                           Constructors/Destructors
  *------------------------------------------------------------------------**/
 
-ShrubberyCreationForm::ShrubberyCreationForm(): AForm("ShrubberyCreationForm", "", 137, 145, false)
+PresidentialPardonForm::PresidentialPardonForm(): AForm("PresidentialPardonForm", "", 5, 25, false)
 {
-	std::cout << "\e[0;32mShrubberyCreationForm Default constructor called\e[0m" << std::endl;
+	std::cout << "\e[0;32mPresidentialPardonForm Default constructor called\e[0m" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &Cpy): AForm(Cpy)
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &Cpy): AForm(Cpy)
 {
-	std::cout << "\e[0;32mShrubberyCreationForm Copy constructor called\e[0m" << std::endl;
+	std::cout << "\e[0;32mPresidentialPardonForm Copy constructor called\e[0m" << std::endl;
 	*this = Cpy;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string target):
-	AForm("ShrubberyCreationForm" ,target, 137, 145, false)
+PresidentialPardonForm::PresidentialPardonForm(const std::string target):
+	AForm("PresidentialPardonForm", target, 5, 25, false)
 {
-	std::cout << "\e[0;32mShrubberyCreationForm NewGrade constructor called\e[0m" << std::endl;
+	std::cout << "\e[0;32mPresidentialPardonForm NewGrade constructor called\e[0m" << std::endl;
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm()
+PresidentialPardonForm::~PresidentialPardonForm()
 {
-	std::cout << "\e[0;31mShrubberyCreationForm Destructor called\e[0m" << std::endl;
+	std::cout << "\e[0;31mPresidentialPardonForm Destructor called\e[0m" << std::endl;
 }
 
 /**------------------------------------------------------------------------
@@ -45,7 +45,13 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 /*	Executes the form with a Bureaucrat executor, if it is not signed or if
 	the grade is not high enought, throws a corresponding exception */
 
-void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
+void pardon(PresidentialPardonForm const & form)
+{
+	std::cout << form.getTarget()
+		<< " has been pardoned by Zaphod Beeblebrox" << std::endl;
+}
+
+void	PresidentialPardonForm::execute(Bureaucrat const & executor) const
 {
 	if (this->_target.empty())
 		throw AForm::NameEmptyException();
@@ -53,18 +59,14 @@ void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 		throw AForm::GradeTooLowException();
 	if (this->_is_signed == false)
 		throw AForm::NotSignedException();
-	std::ofstream file;
-	file.exceptions(std::ofstream::failbit | std::ofstream::badbit);
-	file.open((this->_target + "_shruberry").c_str());
-	printASCITree(file);
-	file.close();
+	pardon(*this);
 }
 
 /**------------------------------------------------------------------------
  *                           OPERATORS
  *------------------------------------------------------------------------**/
 
-ShrubberyCreationForm & ShrubberyCreationForm::operator=(const ShrubberyCreationForm &Cpy)
+PresidentialPardonForm & PresidentialPardonForm::operator=(const PresidentialPardonForm &Cpy)
 {
 	// a verifier
 	std::cout << "\e[0;32mAForm assignement operator called\e[0m" << std::endl;

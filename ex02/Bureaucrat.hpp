@@ -18,14 +18,6 @@
 # include <exception>
 # include "AForm.hpp"
 
-
-class EmptyNameException: public std::exception
-{
-	//! DEFINIR LES EXCEPTIONS A L'INTERIEUR DE LA CLASSE  
-	public:
-	virtual const char *what(void) const throw();
-};
-
 class AForm;
 
 class Bureaucrat
@@ -47,15 +39,29 @@ public:
 	Bureaucrat operator--(int);
 	Bureaucrat &operator-=(int value);
 
-	int getGrade(void) const;
+	int			getGrade(void) const;
 	std::string getName(void) const;
 
-	void	signAForm(AForm &F);
+	void	signForm(AForm &F);
 	void	executeForm(AForm const & form);
 
-	static	EmptyNameException	NameEmptyException;
-	static	std::out_of_range GradeTooHighException;
-	static	std::out_of_range GradeTooLowException;
+	class GradeTooHighException: public std::exception
+	{
+		public:
+		virtual const char *what(void) const throw();
+	};
+
+	class GradeTooLowException: public std::exception
+	{
+		public:
+		virtual const char *what(void) const throw();
+	};
+
+	class NameEmptyException: public std::exception
+	{
+		public:
+		virtual const char *what(void) const throw();
+	};
 };
 
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &B);

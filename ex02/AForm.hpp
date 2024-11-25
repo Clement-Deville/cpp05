@@ -17,7 +17,6 @@
 # include "iostream"
 # include "Bureaucrat.hpp"
 
-class EmptyNameException;
 class Bureaucrat;
 
 class AForm
@@ -44,11 +43,31 @@ public:
 	bool		getSigned(void) const;
 
 	void			beSigned(const Bureaucrat &B);
-	virtual	void	execute(Bureaucrat const & executor) const = 0;
+	virtual void	execute(Bureaucrat const & executor) const = 0;
 
-	static std::out_of_range	GradeTooHighException;
-	static std::out_of_range	GradeTooLowException;
-	static EmptyNameException	NameEmptyException;
+	class GradeTooHighException: public std::exception
+	{
+		public:
+		virtual const char *what(void) const throw();
+	};
+
+	class GradeTooLowException: public std::exception
+	{
+		public:
+		virtual const char *what(void) const throw();
+	};
+
+	class NameEmptyException: public std::exception
+	{
+		public:
+		virtual const char *what(void) const throw();
+	};
+
+	class NotSignedException: public std::exception
+	{
+		public:
+		virtual const char *what(void) const throw();
+	};
 };
 
 std::ostream & operator<<(std::ostream &out, const AForm &B);

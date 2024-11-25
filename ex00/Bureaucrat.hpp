@@ -56,9 +56,26 @@ public:
 
 	int getGrade(void) const;
 	std::string getName(void) const;
-	static TooHighException		GradeTooHighException;
-	static TooLowException		GradeTooLowException;
-	static EmptyNameException	NameEmptyException;
+	class GradeTooHighException: public std::exception
+	{
+		public:
+		virtual const char *what(void) const throw();
+	};
+
+	class GradeTooLowException: public std::exception
+	{
+		public:
+		virtual const char *what(void) const throw();
+	};
+
+	class NameEmptyException: public std::exception
+	{
+		public:
+		virtual const char *what(void) const throw();
+	};
+	// static TooHighException		GradeTooHighException;
+	// static TooLowException		GradeTooLowException;
+	// static EmptyNameException	NameEmptyException;
 };
 
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &B);

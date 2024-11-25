@@ -6,7 +6,7 @@
 #    By: cdeville <cdeville@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/12 16:23:30 by peanut            #+#    #+#              #
-#    Updated: 2024/11/22 16:56:39 by cdeville         ###   ########.fr        #
+#    Updated: 2024/11/25 18:29:30 by cdeville         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,13 @@ DEBUG = -g
 
 SRC_DIR = ./
 
-SRC =	main.cpp \
+SRC =	main2.cpp \
 		Bureaucrat.cpp \
 		AForm.cpp \
 		ShrubberyCreationForm.cpp \
 		printASCIITree.cpp \
+		PresidentialPardonForm.cpp \
+		RobotomyRequestForm.cpp \
 
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 

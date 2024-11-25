@@ -12,9 +12,21 @@
 
 #include "Bureaucrat.hpp"
 
-std::out_of_range	Bureaucrat::GradeTooHighException("Grade Too High");
-std::out_of_range	Bureaucrat::GradeTooLowException("Grade Too Low");
-EmptyNameException	Bureaucrat::NameEmptyException;
+/**------------------------------------------------------------------------
+ *                           Custom exception functions
+ *------------------------------------------------------------------------**/
+
+const char *Bureaucrat::GradeTooLowException::what () const throw(){
+	return ("Bureaucrat: Too Low Exception");
+}
+
+const char *Bureaucrat::GradeTooHighException::what () const throw(){
+	return ("Bureaucrat: Too high Exception");
+}
+
+const char *Bureaucrat::NameEmptyException::what () const throw(){
+	return ("Bureaucrat: Empty Name Exception");
+}
 
 /**------------------------------------------------------------------------
  *                           Constructors/Destructors
@@ -35,13 +47,13 @@ Bureaucrat::Bureaucrat(const std::string name, int newGrade): _name(name)
 {
 	std::cout << "\e[0;32mBureaucrat NewGrade constructor called\e[0m" << std::endl;
 	if (newGrade == 0)
-		throw GradeTooHighException;
+		throw Bureaucrat::GradeTooHighException();
 	if (newGrade < 0)
 		throw std::out_of_range("out of range");
 	if (newGrade > 150)
-		throw GradeTooLowException;
+		throw Bureaucrat::GradeTooLowException();
 	if (name.empty() || onlyWhiteSpace(name))
-		throw NameEmptyException;
+		throw Bureaucrat::NameEmptyException();
 	this->_grade = newGrade;
 }
 
@@ -80,7 +92,7 @@ Bureaucrat & Bureaucrat::operator=(const Bureaucrat &Cpy)
 Bureaucrat	&Bureaucrat::operator++(void)
 {
 	if (this->_grade == 1)
-		throw GradeTooHighException;
+		throw Bureaucrat::GradeTooHighException();
 	this->_grade++;
 	return (*this);
 }
@@ -96,7 +108,7 @@ Bureaucrat	Bureaucrat::operator++(int)
 Bureaucrat &Bureaucrat::operator+=(int value)
 {
 	if (this->_grade - value < 1)
-		throw GradeTooHighException;
+		throw Bureaucrat::GradeTooHighException();
 	this->_grade -= value;
 	return (*this);
 }
@@ -104,7 +116,7 @@ Bureaucrat &Bureaucrat::operator+=(int value)
 Bureaucrat	&Bureaucrat::operator--(void)
 {
 	if (this->_grade == 150)
-		throw GradeTooLowException;
+		throw Bureaucrat::GradeTooLowException();
 	this->_grade--;
 	return (*this);
 }
@@ -122,7 +134,7 @@ Bureaucrat &Bureaucrat::operator-=(int value)
 	if (this->_grade + value < 0)
 		throw std::out_of_range("out of range");
 	if (this->_grade + value > 150)
-		throw Bureaucrat::GradeTooLowException;
+		throw Bureaucrat::GradeTooLowException();
 	this->_grade += value;
 	return (*this);
 }
@@ -141,10 +153,6 @@ bool onlyWhiteSpace(const std::string name)
 	return (true);
 }
 
-const char *EmptyNameException::what () const throw(){
-	return ("Empty Name Exception");
-}
-
 void	Bureaucrat::signForm(Form &F)
 {
 	try
@@ -159,5 +167,4 @@ void	Bureaucrat::signForm(Form &F)
 			" couldn't sign " << F.getName() <<
 			" cause " << e.what() << '\n';
 	}
-
 }

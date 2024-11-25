@@ -13,18 +13,29 @@
 #include "AForm.hpp"
 
 /**------------------------------------------------------------------------
- *                           Prototypes/statics
+ *                           Custom exception functions
  *------------------------------------------------------------------------**/
 
-std::out_of_range	AForm::GradeTooHighException("Grade Too High");
-std::out_of_range	AForm::GradeTooLowException("Grade Too Low");
-EmptyNameException	AForm::NameEmptyException;
+const char *AForm::GradeTooLowException::what () const throw(){
+	return ("AForm: Too Low Exception");
+}
 
+const char *AForm::GradeTooHighException::what () const throw(){
+	return ("AForm: Too high Exception");
+}
+
+const char *AForm::NameEmptyException::what () const throw(){
+	return ("AForm: Empty Name Exception");
+}
+
+const char *AForm::NotSignedException::what () const throw(){
+	return ("AForm: Not Signed Exception");
+}
 /**------------------------------------------------------------------------
  *                           Constructors/Destructors
  *------------------------------------------------------------------------**/
 
-AForm::AForm() : _name(""), _target(""), _GradeToSign(1), _GradeToExec(1), _is_signed(false)
+AForm::AForm() : _name("Default"), _target(""), _GradeToSign(1), _GradeToExec(1), _is_signed(false)
 {
 	std::cout << "\e[0;32mAForm Default constructor called\e[0m" << std::endl;
 }
@@ -42,13 +53,13 @@ AForm::AForm(const std::string name, const std::string target, int newGradeToExe
 {
 	std::cout << "\e[0;32mAForm NewGrade constructor called\e[0m" << std::endl;
 	if (newGradeToExec == 0 || newGradeToSign == 0)
-		throw GradeTooHighException;
+		throw AForm::GradeTooHighException();
 	if (newGradeToExec < 0 || newGradeToSign < 0)
 		throw std::out_of_range("out of range");
 	if (newGradeToExec > 150 || newGradeToSign > 150)
-		throw GradeTooLowException;
-	if (name.empty() || onlyWhiteSpace(name) || target.empty() || onlyWhiteSpace(target))
-		throw NameEmptyException;
+		throw AForm::GradeTooLowException();
+	if (target.empty() || onlyWhiteSpace(target) || target.empty() || onlyWhiteSpace(target))
+		throw AForm::NameEmptyException();
 }
 
 AForm::~AForm()
@@ -88,20 +99,20 @@ bool	AForm::getSigned(void) const
 void	AForm::beSigned(const Bureaucrat &B)
 {
 	if (B.getName().empty())
-		throw B.NameEmptyException;
+		throw AForm::NameEmptyException();
 	if (this->_is_signed)
 		throw std::runtime_error("Is already signed");
 	if (this->getGradeToSign() >= B.getGrade())
 		_is_signed = true;
 	else
-		throw Bureaucrat::GradeTooLowException;
+		throw AForm::GradeTooLowException();
 }
-
 
 std::ostream & operator<<(std::ostream &out, const AForm &B)
 {
-	out << B.getName() << ", AForm grade to exec: " << B.getGradeToExec()
-	<< ", AForm grade to sign: " << B.getGradeToSign() << " signed: "
+	out << "Name: " << B. getName() << ", Target: "
+		<< B.getTarget() << ", grade to exec: " << B.getGradeToExec()
+	<< ", grade to sign: " << B.getGradeToSign() << " signed: "
 	<< (B.getSigned()? "true" : "false") << std::endl;
 	return (out);
 }
