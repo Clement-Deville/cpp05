@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME=Mama
+NAME=InternSlavery
 
 CC=c++
 
@@ -20,13 +20,14 @@ DEBUG = -g
 
 SRC_DIR = ./
 
-SRC =	main3.cpp \
+SRC =	main.cpp \
 		Bureaucrat.cpp \
 		AForm.cpp \
 		ShrubberyCreationForm.cpp \
 		printASCIITree.cpp \
 		PresidentialPardonForm.cpp \
 		RobotomyRequestForm.cpp \
+		Intern.cpp
 
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 
