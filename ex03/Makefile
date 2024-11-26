@@ -20,7 +20,7 @@ DEBUG = -g
 
 SRC_DIR = ./
 
-SRC =	main.cpp \
+SRC =	main3.cpp \
 		Bureaucrat.cpp \
 		AForm.cpp \
 		ShrubberyCreationForm.cpp \
