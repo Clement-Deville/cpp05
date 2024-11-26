@@ -171,6 +171,8 @@ void	Bureaucrat::signForm(AForm &F)
 
 void	Bureaucrat::executeForm(AForm const & form)
 {
+	if (this->_name.empty() || onlyWhiteSpace(this->_name))
+		throw Bureaucrat::NameEmptyException();
 	try
 	{
 		form.execute(*this);

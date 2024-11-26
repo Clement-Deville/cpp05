@@ -20,7 +20,7 @@ DEBUG = -g
 
 SRC_DIR = ./
 
-SRC =	main2.cpp \
+SRC =	main3.cpp \
 		Bureaucrat.cpp \
 		AForm.cpp \
 		ShrubberyCreationForm.cpp \
@@ -44,7 +44,7 @@ all: $(NAME)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.cpp
 	@mkdir -p $(OBJ_DIR)
-	echo "Compiling $< to $@"
+	@echo "Compiling $< to $@"
 	$(CC) $(CFLAGS) $(DEBUG) -c $< -o $@
 
 $(NAME): $(OBJS)
