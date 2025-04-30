@@ -17,24 +17,6 @@
 # include <iostream>
 # include <exception>
 
-class TooHighException: public std::exception
-{
-	public:
-	virtual const char *what(void) const throw();
-};
-
-class TooLowException: public std::exception
-{
-	public:
-	virtual const char *what(void) const throw();
-};
-
-class EmptyNameException: public std::exception
-{
-	public:
-	virtual const char *what(void) const throw();
-};
-
 class Bureaucrat
 {
 private:
@@ -73,9 +55,6 @@ public:
 		public:
 		virtual const char *what(void) const throw();
 	};
-	// static TooHighException		GradeTooHighException;
-	// static TooLowException		GradeTooLowException;
-	// static EmptyNameException	NameEmptyException;
 };
 
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &B);

@@ -57,9 +57,3 @@ fclean: clean
 	rm -rf $(OBJ_DIR)
 
 re: fclean all
-
-norme:
-	@echo "\e[0;32m\nChecking .cpp norme:\n\e[0m"
-	norminette ./sources
-	@echo "\e[0;32m\nChecking .hpp norme:\n\e[0m"
-	norminette ./includes
