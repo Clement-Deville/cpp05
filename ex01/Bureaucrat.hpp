@@ -49,7 +49,7 @@ public:
 	std::string getName(void) const;
 
 	void	signForm(Form &F);
-	
+
 	class GradeTooHighException: public std::exception
 	{
 		public:

@@ -6,7 +6,7 @@
 #    By: cdeville <cdeville@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/12 16:23:30 by peanut            #+#    #+#              #
-#    Updated: 2024/11/18 12:08:48 by cdeville         ###   ########.fr        #
+#    Updated: 2025/05/01 16:32:50 by cdeville         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC_DIR = ./
 SRC =	main.cpp \
 		Bureaucrat.cpp \
 		Form.cpp \
-		
+
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 
 INCLUDES_DIR= ./
@@ -44,16 +44,16 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.cpp
 	$(CC) $(CFLAGS) $(DEBUG) -c $< -o $@
 
 $(NAME): $(OBJS)
-	@echo "\e[0;32m\nLinking executable:\n\e[0m"
+	@echo -e "\e[0;32m\nLinking executable:\n\e[0m"
 	$(CC) $(CFLAGS) $(OBJS) -o $@
-	@echo "\e[0;32m\nMandatory part compiled !\n\e[0m"
+	@echo -e "\e[0;32m\nMandatory part compiled !\n\e[0m"
 
 clean:
-	@echo "\e[0;31m\nDeleting objects\n\e[0m"
+	@echo -e "\e[0;31m\nDeleting objects\n\e[0m"
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	@echo "\e[0;31m\nDeleting executable\n\e[0m"
+	@echo -e "\e[0;31m\nDeleting executable\n\e[0m"
 	rm -f $(NAME)
 	rm -rf $(OBJ_DIR)
 
