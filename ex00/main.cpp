@@ -6,7 +6,7 @@
 /*   By: cdeville <cdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:06:34 by cdeville          #+#    #+#             */
-/*   Updated: 2024/11/25 12:25:06 by cdeville         ###   ########.fr       */
+/*   Updated: 2025/05/01 16:13:09 by cdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	compareStrings(int param, std::string &answer)
 {
 	std::string base;
 	std::string little_base;
-
+	int			i;
 	if (param == YES)
 	{
 		base = "yes";
@@ -39,12 +39,13 @@ bool	compareStrings(int param, std::string &answer)
 	}
 	if (answer.length() != base.length() && answer.length() != little_base.length())
 		return (false);
-	for (int i = -1; answer[i] && base[i]; ++i)
+
+	for (i = 0; answer[i] && base[i]; i++)
 	{
 		if (tolower(answer[i]) != base[i])
 			return (false);
 	}
-	if (tolower(answer[0]) != little_base[0])
+	if (tolower(answer[i]) != little_base[i])
 		return (false);
 	return (true);
 }
